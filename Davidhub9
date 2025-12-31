@@ -1,0 +1,74 @@
+-- Espera para evitar bug no Delta
+task.wait(1)
+
+-- Carregar Rayfield
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+-- Janela
+local Window = Rayfield:CreateWindow({
+    Name = "David Hub | Brookhaven",
+    LoadingTitle = "David Hub",
+    LoadingSubtitle = "Brookhaven RP",
+    KeySystem = false
+})
+
+-- Abas (em cima)
+local MainTab = Window:CreateTab("🏠 Main", 4483362458)
+local PlayerTab = Window:CreateTab("🧍 Player", 4483362458)
+local FunTab = Window:CreateTab("🎉 Fun", 4483362458)
+
+-- =================
+-- MAIN
+-- =================
+MainTab:CreateButton({
+    Name = "Teste de UI",
+    Callback = function()
+        Rayfield:Notify({
+            Title = "David Hub",
+            Content = "Rayfield funcionando no Brookhaven!",
+            Duration = 4
+        })
+    end
+})
+
+-- =================
+-- PLAYER
+-- =================
+PlayerTab:CreateSlider({
+    Name = "WalkSpeed",
+    Range = {16, 150},
+    Increment = 1,
+    CurrentValue = 16,
+    Callback = function(Value)
+        local plr = game.Players.LocalPlayer
+        if plr.Character and plr.Character:FindFirstChild("Humanoid") then
+            plr.Character.Humanoid.WalkSpeed = Value
+        end
+    end
+})
+
+PlayerTab:CreateSlider({
+    Name = "JumpPower",
+    Range = {50, 200},
+    Increment = 5,
+    CurrentValue = 50,
+    Callback = function(Value)
+        local plr = game.Players.LocalPlayer
+        if plr.Character and plr.Character:FindFirstChild("Humanoid") then
+            plr.Character.Humanoid.JumpPower = Value
+        end
+    end
+})
+
+-- =================
+-- FUN
+-- =================
+FunTab:CreateButton({
+    Name = "Teleportar para Spawn",
+    Callback = function()
+        local plr = game.Players.LocalPlayer
+        if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+            plr.Character.HumanoidRootPart.CFrame = CFrame.new(0, 10, 0)
+        end
+    end
+})
